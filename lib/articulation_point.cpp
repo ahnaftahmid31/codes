@@ -1,40 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define white 0
-#define grey 1
-#define black 2
-#define maxNodes 100005
+#define N 100005
 
-vector<int> edgeof[maxNodes];
-vector<int> aps;
-bool visited[maxNodes];
-int dis[maxNodes];
-int parent[maxNodes];
-int low[maxNodes];
-bool ap[maxNodes];
-int t;  // <-- time
+vector<int> adj[N], aps;
+bool visited[N];
+int dis[N], par[N], low[N], t;// t <- time;
+bool ap[N];
+
 
 void dfs(int u, int p) {
   visited[u] = true;
-  dis[u] = ++t;
-  low[u] = dis[u];
-  int numChild = 0;  // number of white, unvisited child
+  low[u] = dis[u] = ++t;
+  int numChild = 0;  // number unvisited child
 
-  for (int i = 0; i < edgeof[u].size(); i++) {
-    int v = edgeof[u][i];
-
+  for (int i = 0; i < adj[u].size(); i++) {
+    int v = adj[u][i];
     if (v == p) continue;  // if parent then ignore
-
     if (visited[v]) {
       low[u] = min(low[u], dis[v]);  // back-edge
-    }
-
-    if (!visited[v]) {
+    } else {
       numChild++;
       dfs(v, u);
       low[u] = min(low[u], low[v]);
-
       if (dis[u] <= low[v] && p != -1) {
         ap[u] = true;
         aps.push_back(u);
@@ -70,18 +58,17 @@ void printAPs() {
   printf("\n");
 }
 
+// a problem on hackerearth was solved using this
 void query() {
-  int numQuery;
+  int numQuery, queries[N];
   scanf("%d", &numQuery);
 
-  int queries[maxNodes];
   for (int i = 1; i <= numQuery; i++) {
     cin >> queries[i];
   }
-
   for (int i = 1; i <= numQuery; i++) {
     if (ap[queries[i]] == true) {
-      printf("Satisfied %d\n", edgeof[queries[i]].size());
+      printf("Satisfied %d\n", adj[queries[i]].size());
     } else {
       printf("Not Satisfied\n");
     }
@@ -100,14 +87,14 @@ int main() {
   scanf("%d %d", &numVertex, &numEdges);
 
   for (int i = 0; i < numVertex; i++) {
-    edgeof[i].clear();
+    adj[i].clear();
   }
 
   for (int i = 0; i < numEdges; i++) {
     int u, v;
     scanf("%d %d", &u, &v);
-    edgeof[u].push_back(v);
-    edgeof[v].push_back(u);
+    adj[u].push_back(v);
+    adj[v].push_back(u);
   }
 
   dfs_init(numVertex);
