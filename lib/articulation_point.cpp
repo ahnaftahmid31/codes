@@ -4,21 +4,25 @@ using namespace std;
 #define N 100005
 
 vector<int> adj[N], aps;
-bool visited[N];
-int dis[N], par[N], low[N], t;// t <- time;
+bool vis[N];
+int dis[N], par[N], low[N], t;  // t <- time;
 bool ap[N];
 
-
 void dfs(int u, int p) {
-  visited[u] = true;
+  vis[u] = true;
   low[u] = dis[u] = ++t;
-  int numChild = 0;  // number unvisited child
+  int numChild = 0;  // number of unvisited child
 
   for (int i = 0; i < adj[u].size(); i++) {
     int v = adj[u][i];
-    if (v == p) continue;  // if parent then ignore
-    if (visited[v]) {
-      low[u] = min(low[u], dis[v]);  // back-edge
+    if (v == p) {
+      continue;
+    }  // if parent then ignore
+    if (vis[v]) {
+      if (low[u] > dis[v]) {
+        printf("%d %d --> backedge\n", u, v);
+        low[u] = dis[v];  // back-edge
+      }
     } else {
       numChild++;
       dfs(v, u);
@@ -35,16 +39,16 @@ void dfs(int u, int p) {
   }
 }
 
-void dfs_init(int numVer) {
+void dfs_init(int numVer, int s) {
   t = 0;
   for (int i = 0; i <= numVer; i++) {
-    visited[i] = false;
+    vis[i] = false;
     ap[i] = false;
     low[i] = 0;
     dis[i] = 0;
   }
-  for (int i = 1; i <= numVer; i++) {
-    if (!visited[i]) {
+  for (int i = s; i < numVer + s; i++) {
+    if (!vis[i]) {
       dfs(i, -1);
     }
   }
@@ -97,6 +101,6 @@ int main() {
     adj[v].push_back(u);
   }
 
-  dfs_init(numVertex);
-  query();
+  dfs_init(numVertex, 0);  // nodes, starting point
+  printAPs();
 }

@@ -18,14 +18,12 @@ void reset(int n) {
   }
 }
 
-void fowarshal(int n) {
+void fowarshall(int n) {
   for (int k = 1; k<=n; k++) {
     for (int i = 1; i<=n; i++) {
       for (int j = 1; j<=n; j++) {
         if (cost[i][k] + cost[k][j] < cost[i][j]){
-          
           cost[i][j] = cost[i][k] + cost[k][j];
-          cout << i << "->" << j << " : " << cost[i][j] <<endl;
           nxt[i][j] = nxt[i][k];
         } 
       }
@@ -61,7 +59,7 @@ int main() {
       cin >> u >> v >> w;
       cost[u][v] = w;
     }
-    fowarshal(n);
+    fowarshall(n);
     printf("fowarshal done!\n");
     path_find(1, 4);
     //cout << path.size() << endl;
