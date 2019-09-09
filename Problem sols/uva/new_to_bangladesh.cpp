@@ -45,7 +45,8 @@ void bfs(int s, int n) {
         dis[v] = cost[u][i] + dis[u];
         somoy[v] = tym[u][i] + somoy[u];
         pq.push(node(v, dis[v], somoy[v]));
-      } else if (tym[u][i] + somoy[u] == somoy[v]) {
+      }
+      else if (tym[u][i] + somoy[u] == somoy[v]) {
         if (dis[u] + cost[u][i] < dis[v]) {
           dis[v] = dis[u] + cost[u][i];
           pq.push(node(v, dis[v], somoy[v]));
