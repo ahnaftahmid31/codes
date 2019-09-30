@@ -33,7 +33,7 @@ bool isCircuit(int n) {
 bool isPath(int n) {
   int diffDeg = 0;
   for (int i = 1; i <= n; i++) {
-    if (indeg[i] != outdeg[i]) {
+    if (indeg[i] != outdeg[i]) { // below testing is not complete
       if (abs((long)(indeg[i] - outdeg[i])) == 1) {
         diffDeg++;
       }
