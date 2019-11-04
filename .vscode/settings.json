@@ -7,7 +7,7 @@
   "workbench.colorTheme": "Material Theme High Contrast",
   "code-runner.executorMap": {
     "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-    "cpp": "cd $dir && g++ -std=c++14 $fileName -o a && a",
+    "cpp": "g++ -std=c++14 $fileName -o a && a",
     "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
   },
   "breadcrumbs.enabled": false,
