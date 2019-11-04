@@ -4,7 +4,7 @@
   "C_Cpp.clang_format_style": "Google",
   "explorer.openEditors.visible": 0,
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "Monokai Pro (Filter Machine)",
+  "workbench.colorTheme": "Material Theme High Contrast",
   "code-runner.executorMap": {
     "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
     "cpp": "cd $dir && g++ -std=c++14 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
